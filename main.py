@@ -8,6 +8,19 @@ MENU = """
 5. Exit
 """
 
+def add_expense(expenses):
+    desc = input("Please enter description: ")
+
+    while True:
+        try:
+            amount = int(input("Please enter amount: "))
+            break
+        except ValueError:
+            print("Please enter a valid number.")
+
+    new_exp = {"description": desc, "amount": amount}
+    expenses.append(new_exp)
+
 while True:
     print("💰 Expense Tracker")
     print(MENU)
@@ -21,7 +34,7 @@ while True:
     if user_choice == 5:
         break
     elif user_choice == 1:
-        print(f"your choice = {user_choice}")
+        add_expense(expenses)
     elif user_choice == 2:
         print(f"your choice = {user_choice}")
     elif user_choice == 3:
