@@ -39,10 +39,29 @@ def show_total(expenses):
 
     return total
 
+def delete_expense(expenses):
+    view_expenses(expenses)
+
+    if not expenses:
+        return
+    while True:
+        try:
+            user_del = int(input("Enter expense number to delete: "))
+        except ValueError:
+            print("Please enter a valid number.")
+            continue
+
+        if user_del < 1 or user_del > len(expenses):
+            print("Invalid expense number.")
+            continue
+
+        del expenses[user_del - 1]
+        print("Expense deleted successfully.")
+        break
+
 while True:
     print("💰 Expense Tracker")
     print(MENU)
-
 
     try:
         user_choice = int(input("Choose an option: "))
@@ -59,7 +78,7 @@ while True:
         total = show_total(expenses)
         print(f"total = ${total}")
     elif user_choice == 4:
-        print(f"your choice = {user_choice}")
+        delete_expense(expenses)
     else:
         print("enter number between 1 to 5")
         continue
