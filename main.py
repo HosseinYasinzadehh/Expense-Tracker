@@ -21,6 +21,16 @@ def add_expense(expenses):
     new_exp = {"description": desc, "amount": amount}
     expenses.append(new_exp)
 
+def view_expenses(expenses):
+    num = 1
+
+    if len(expenses) == 0:
+        print("nothing for view")
+    else:
+        for exp in expenses:
+            print(f"{num}. {exp['description']} - ${exp['amount']}")
+            num += 1
+
 while True:
     print("💰 Expense Tracker")
     print(MENU)
@@ -36,7 +46,7 @@ while True:
     elif user_choice == 1:
         add_expense(expenses)
     elif user_choice == 2:
-        print(f"your choice = {user_choice}")
+        view_expenses(expenses)
     elif user_choice == 3:
         print(f"your choice = {user_choice}")
     elif user_choice == 4:
