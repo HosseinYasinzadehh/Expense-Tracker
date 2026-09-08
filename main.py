@@ -31,6 +31,14 @@ def view_expenses(expenses):
             print(f"{num}. {exp['description']} - ${exp['amount']}")
             num += 1
 
+def show_total(expenses):
+    total = 0
+
+    for exp in expenses:
+        total += exp["amount"]
+
+    return total
+
 while True:
     print("💰 Expense Tracker")
     print(MENU)
@@ -48,7 +56,8 @@ while True:
     elif user_choice == 2:
         view_expenses(expenses)
     elif user_choice == 3:
-        print(f"your choice = {user_choice}")
+        total = show_total(expenses)
+        print(f"total = ${total}")
     elif user_choice == 4:
         print(f"your choice = {user_choice}")
     else:
