@@ -1,4 +1,5 @@
-expenses = []
+import json
+
 
 MENU = """
 1. Add expense
@@ -7,6 +8,18 @@ MENU = """
 4. Delete expense
 5. Exit
 """
+
+def load_expenses():
+    try:
+        with open("expenses.json") as file:
+            return json.load(file)
+    except FileNotFoundError:
+        return []
+
+def save_expenses(expenses):
+    with open("expenses.json", "w") as file:
+      json.dump(expenses, file)
+      
 
 def add_expense(expenses):
     desc = input("Please enter description: ")
@@ -20,6 +33,7 @@ def add_expense(expenses):
 
     new_exp = {"description": desc, "amount": amount}
     expenses.append(new_exp)
+    save_expenses(expenses)
 
 def view_expenses(expenses):
     num = 1
@@ -57,7 +71,11 @@ def delete_expense(expenses):
 
         del expenses[user_del - 1]
         print("Expense deleted successfully.")
+        save_expenses(expenses)
         break
+
+expenses = load_expenses()
+
 
 while True:
     print("💰 Expense Tracker")
